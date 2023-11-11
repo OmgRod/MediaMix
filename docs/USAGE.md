@@ -32,8 +32,11 @@ npm i
 5. Enter the following info for the account:
 
 > Username: xampp
+>
 > Hostname: localhost
+>
 > Password: password
+>
 >
 > For user permissions, give global privileges.
 

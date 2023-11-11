@@ -39,6 +39,9 @@ app.use(watchVideo);
 const loginAccount = require('./routes/api/v1/loginAccount'); // Adjust the path as needed
 app.use(loginAccount);
 
+const deleteUnusedVideos = require('./routes/api/v1/deleteUnusedVideos'); // Adjust the path as needed
+app.use(deleteUnusedVideos);
+
 // Create the HTTP server with Express.js app
 const server = http.createServer(app);
 
