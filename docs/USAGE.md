@@ -16,7 +16,7 @@ npm i
 
 ## Section 2: XAMPP
 
-1. Visit the XAMPP website.
+1. Visit the [XAMPP website](https://www.apachefriends.org/index.html).
 2. Download the appropriate version for your operating system.
 3. Follow the installation instructions.
 
