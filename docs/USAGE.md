@@ -28,7 +28,17 @@ npm i
 > If MySQL doesn't startup, attempt running "xampp.bat"
 
 3. Now, click on the "Admin" button next to MySQL.
-4. Click on the "Import" button on the top and select the "database_schema.sql" file in the root.
+4. Click on "User accounts"
+5. Enter the following info for the account:
+
+> Username: xampp
+> Hostname: localhost
+> Password: password
+>
+> For user permissions, give global privileges.
+
+6. Create a new database called "mediamix" and click into it.
+7. Click on the "Import" button on the top and select the "database_schema.sql" file in the root.
 
 ## Section 4.1 (*Optional*): VS Code
 
