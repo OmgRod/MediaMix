@@ -1,0 +1,44 @@
+<!-- views/video.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <%- include("modules/head") %>
+        <%- include("modules/defaults") %>
+        <title>MediaMix</title>
+    <title><%= videoTitle %></title>
+
+    <style>
+        /* Default styling for the video tag */
+video {
+  width: 100%; /* Set width to 100% to maintain aspect ratio */
+  height: auto; /* Allow the height to adjust proportionally */
+}
+
+/* Media query for landscape orientation */
+@media (orientation: landscape) {
+  video {
+    width: auto; /* Allow the width to adjust proportionally */
+    height: 90vh; /* Set height to 100vh in portrait mode */
+  }
+}
+
+/* Media query for portrait orientation */
+@media (orientation: portrait) {
+  video {
+    width: 100vw; /* Set width to 100vw in landscape mode */
+    height: auto; /* Allow the height to adjust proportionally */
+  }
+}
+
+    </style>
+</head>
+<body>
+  <%- include("modules/navbar") %>
+    <video controls autoplay>
+        <source src="<%= videoUrl %>" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <h1><%= videoTitle %></h1>
+</body>
+</html>

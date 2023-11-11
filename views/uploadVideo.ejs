@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include("modules/head") %>
+    <%- include("modules/defaults") %>
+    <title>Upload - Mediamix</title>
+</head>
+<body>
+    <%- include("modules/navbar") %>
+    <main class="m-4">
+        <h1>Upload Video</h1>
+        <form action="/api/v1/uploadVideo" method="post" enctype="multipart/form-data">
+            <!-- Title -->
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required><br><br>
+
+            <!-- Thumbnail Image Selector -->
+            <label for="thumbnail">Thumbnail:</label>
+            <input type="file" id="thumbnail" name="thumbnail" accept="image/*" required><br><br>
+
+            <!-- Tags (comma-separated) -->
+            <label for="tags">Tags (comma-separated):</label>
+            <input type="text" id="tags" name="tags" required><br><br>
+
+            <!-- Video File -->
+            <label for="video">Video File:</label>
+            <input type="file" id="video" name="video" accept="video/*" required><br><br>
+
+            <!-- Other form fields (e.g., creatorUsername, creatorPassword) -->
+            <label for="creatorUsername">Creator Username:</label>
+            <input type="text" id="creatorUsername" name="creatorUsername" required><br><br>
+
+            <label for="creatorPassword">Creator Password:</label>
+            <input type="password" id="creatorPassword" name="creatorPassword" required><br><br>
+
+            <input type="submit" value="Upload">
+        </form>
+    </main>
+</body>
+</html>

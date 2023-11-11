@@ -1,0 +1,96 @@
+<style>
+  /* Common styles for both landscape and portrait */
+  nav {
+    background-color: #afafaf;
+    padding: 0.5em 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping */
+    height: auto; /* Change height to auto */
+    color: white;
+  }
+
+  .logo > a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.25em;
+  }
+    .portrait-nav {
+      display: none;
+    }
+
+    /* Add landscape-specific styles here */
+    .navbar-right-landscape {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap; /* Allow wrapping */
+    }
+
+    .search-bar-container-landscape {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-bar-landscape {
+      border: none;
+      padding: 0.5em;
+      border-radius: 0.25em;
+      margin-right: 0.5em;
+    }
+
+    .search-button-landscape {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 0.5em 1em;
+      border-radius: 0.25em;
+      cursor: pointer;
+    }
+
+  </style>
+
+<!-- Landscape -->
+<nav class="landscape-nav">
+  <span class="logo"><a href="/">MediaMix</a></span>
+  <div class="navbar-right-landscape">
+    <a class="btn" href="/upload"><i class="fa-solid fa-upload"></i></a>
+    <a id="user-info-landscape" class="btn btn-secondary" href="#" style="display: none;">
+      <span id="username-landscape"></span> <i class="fa-solid fa-user"></i>
+    </a>
+    <a class="btn" href="/login"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>
+    <a class="btn" href="/search"><i class="fas fa-search"></i></a>
+    <div class="dropdown">
+      <a class="btn" href="/login"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+      <div class="dropdown-menu">
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  document.addEventListener("DOMContentLoaded", async function () {
+    // Get the values of username and hashedPassword from localStorage
+    const username = localStorage.getItem("username");
+    const hashedPassword = localStorage.getItem("hashedPassword");
+
+    if (username && hashedPassword) {
+      // Make a fetch request to /api/v1/accountAuth with the data from localStorage
+      const response = await fetch(`/api/v1/accountAuth?username=${username}&password=${hashedPassword}`);
+      const data = await response.json();
+
+      if (data.result === "success") {
+        // Authentication was successful, replace the "Login/Signup" button with the username
+        document.getElementById("login-signup-btn-landscape").style.display = "none";
+        document.getElementById("user-info-landscape").style.display = "block";
+        document.getElementById("user-info-portrait").style.display = "block";
+        document.getElementById("login-signup-btn-portrait").style.display = "none";
+        const userInfoLinkLandscape = document.getElementById("user-info-landscape");
+        userInfoLinkLandscape.href = `/profile/${username}`; // Update the link to the user's profile
+        const userInfoLinkPortrait = document.getElementById("user-info-portrait");
+        userInfoLinkPortrait.href = `/profile/${username}`; // Update the link to the user's profile
+      }
+    }
+  });
+</script>

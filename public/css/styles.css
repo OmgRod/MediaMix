@@ -1,0 +1,27 @@
+/* Add CSS styles for the video tiles */
+.videos-container {
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+  }
+  
+  .video-home {
+    width: 30vw;
+    margin-right: 10px; /* Add spacing between video tiles */
+    display: flex;
+    flex-direction: column; /* Display video details below thumbnail */
+    align-items: center; /* Center-align content */
+  }
+
+.video-thumbnail-home {
+    max-width: 100%;
+}
+  
+  .video-details-home {
+    max-width: 100%;
+  }
+  
+  /* Remove underline and set text color for links within .video-details-home */
+  .video-details-home a {
+    text-decoration: none;
+    color: black;
+  }

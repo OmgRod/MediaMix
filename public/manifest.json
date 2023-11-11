@@ -1,0 +1,22 @@
+{
+    "name": "MediaMix",
+    "short_name": "MediaMix",
+    "description": "Watch videos, listen to music, watch movies, and read eBooks all in one place!",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#007bff",
+    "icons": [
+      {
+        "src": "/images/logo.png",
+        "sizes": "236x236",
+        "type": "image/png"
+      }
+    ],
+    "splash_pages": null,
+    "scope": "/",
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "dir": "auto",
+    "lang": "en-US"
+  }

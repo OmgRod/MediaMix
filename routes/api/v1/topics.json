@@ -1,0 +1,29 @@
+{
+  "categories": [
+      { "id": 1, "name": "Cooking" },
+      { "id": 2, "name": "Gaming" },
+      { "id": 3, "name": "Technology" },
+      { "id": 4, "name": "DIY" },
+      { "id": 5, "name": "Fitness" },
+      { "id": 6, "name": "Entertainment" },
+      { "id": 7, "name": "Comedy" },
+      { "id": 8, "name": "Movies" },
+      { "id": 9, "name": "Music" },
+      { "id": 10, "name": "Fashion" },
+      { "id": 11, "name": "Art" },
+      { "id": 12, "name": "Pets" },
+      { "id": 13, "name": "History" },
+      { "id": 14, "name": "Education" },
+      { "id": 15, "name": "Photography" },
+      { "id": 16, "name": "Automotive" },
+      { "id": 17, "name": "Lifestyle" },
+      { "id": 18, "name": "Spirituality" },
+      { "id": 19, "name": "Makeup" },
+      { "id": 20, "name": "Literature" },
+      { "id": 21, "name": "Gardening" },
+      { "id": 22, "name": "Finance" },
+      { "id": 23, "name": "Crafts" },
+      { "id": 24, "name": "Language" },
+      { "id": 25, "name": "Sustainability" }
+  ]
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include("../modules/head") %>
+  <%- include("../modules/defaults") %>
+  <title>MediaMix</title>
+  <style>
+    /* Add this CSS to make the buttons stack vertically within a container */
+    .btn-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .btn-container > .btn {
+      margin: 5px 0; /* Optional: Add some space between the buttons */
+    }
+  </style>
+</head>
+
+<body>
+  <%- include("../modules/navbar") %>
+  <main>
+    <section class="full-page">
+      <div class="m-4 text-center">
+        <h1><i class="fa-brands fa-apple"></i> iOS Installation Instructions</h1>
+        <div class="btn-container">
+          <button onclick="" class="btn btn-secondary">Continue browsing</a>
+          <a href="#install" class="btn btn-primary">Installation instructions</a>
+        </div>
+        <div id="install">
+          <ol style="text-align: left;">
+            <li>Tap the share <i class="fa-solid fa-arrow-up-from-bracket"></i> icon at the bottom of the screen.</li>
+            <li>Then, scroll down until you find "<i class="fa-regular fa-square-plus"></i> Add To Home Screen" </li>
+            <li>Lastly, press the "Add" button on the top-right of the screen.</li>
+            <li>Go to the home screen and open the app.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="js/script.js"></script>
+  <script>
+    function continueBrowsing() {
+      localStorage.setItem('install_prompt', '1');
+      window.open('/', '_self')
+    }
+  </script>
+</body>
+
+</html>

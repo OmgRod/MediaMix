@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include("modules/head") %>
+  <%- include("modules/defaults") %>
+  <title>MediaMix</title>
+  <style>
+    /* Add CSS styles for the video tiles */
+    .videos-container {
+      display: flex;
+      overflow-x: auto; /* Enable horizontal scrolling */
+    }
+
+    .video-home {
+      width: 30vw;
+      margin-right: 10px; /* Add spacing between video tiles */
+    }
+
+    /* Remove margin-right for the last video tile to prevent extra spacing */
+    .video-home:last-child {
+      margin-right: 0;
+    }
+
+    .video-thumbnail-home {
+      max-width: 100%;
+    }
+
+    .video-details-home {
+      max-width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <%- include("modules/navbar") %>
+  <main class="m-4">
+    <section>
+      <h3>Recent Videos <i class="fa-solid fa-chevron-right"></i></h3>
+      <div class="videos-container" id="recentVideos">
+        <!-- Video tiles will be dynamically generated here -->
+      </div>
+    </section>
+  </main>
+  <script src="js/script.js"></script>
+  <script src="js/mobile.js"></script>
+  <script>
+    // Fetch recent videos from the API
+    async function fetchRecentVideos() {
+      try {
+        const response = await fetch('/api/v1/recentVideos');
+        if (!response.ok) {
+          throw new Error('Failed to fetch recent videos');
+        }
+        const data = await response.json();
+        return data.videos || [];
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
+    }
+
+    // Function to render video tiles
+    async function renderVideoTiles() {
+      const videos = await fetchRecentVideos();
+      const videosContainer = document.getElementById('recentVideos');
+
+      // Clear the existing content
+      videosContainer.innerHTML = '';
+
+      videos.forEach((video) => {
+        const videoTile = document.createElement('a');
+        videoTile.className = 'video-home';
+        videoTile.href = "/video/watch?v=" + video.VideoID;
+
+        const thumbnail = document.createElement('img');
+        thumbnail.className = 'video-thumbnail-home';
+        thumbnail.src = video.ThumbnailURL;
+        thumbnail.alt = video.Title;
+
+        const videoDetails = document.createElement('div');
+        videoDetails.className = 'video-details-home';
+        const title = document.createElement('h6');
+        title.textContent = video.Title;
+        videoDetails.appendChild(title);
+
+        videoTile.appendChild(thumbnail);
+        videoTile.appendChild(videoDetails);
+        videosContainer.appendChild(videoTile);
+      });
+    }
+
+    // Call the function to render video tiles
+    renderVideoTiles();
+  </script>
+</body>
+
+</html>
