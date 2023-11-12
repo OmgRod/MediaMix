@@ -2,12 +2,12 @@
 
 ## Owners
 
-- @0mgRod - Owner and Founder
+- [@0mgRod](https://github.com/0mgRod) - Owner and Founder
 
 ## Developers
 
-- @0mgRod - Lead Developer
-- ChatGPT - Partial backend developer
+- [@0mgRod](https://github.com/0mgRod) - Lead Developer
+- [ChatGPT](https://chat.openai.com) - Partial backend developer
 
 ## Icons
 
