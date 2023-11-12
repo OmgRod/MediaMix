@@ -36,7 +36,7 @@
   <%- include("modules/navbar") %>
   <main class="m-4">
     <section>
-      <h3>Recent Videos <i class="fa-solid fa-chevron-right"></i></h3>
+      <h3><a href="/?cat=1">Recent Videos <i class="fa-solid fa-chevron-right"></i></a></h3>
       <div class="videos-container" id="recentVideos">
         <!-- Video tiles will be dynamically generated here -->
       </div>
@@ -45,24 +45,35 @@
   <script src="js/script.js"></script>
   <script src="js/mobile.js"></script>
   <script>
-    // Fetch recent videos from the API
-    async function fetchRecentVideos() {
-      try {
-        const response = await fetch('/api/v1/recentVideos');
-        if (!response.ok) {
-          throw new Error('Failed to fetch recent videos');
-        }
-        const data = await response.json();
-        return data.videos || [];
-      } catch (error) {
-        console.error(error);
-        return [];
-      }
+    // Fetch recent videos from the API with an optional parameter for the number of videos
+async function fetchRecentVideos(numVideos) {
+  try {
+    const response = await fetch(`/api/v1/recentVideos?limit=${numVideos}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch recent videos');
     }
+    const data = await response.json();
+    return data.videos || [];
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
 
-    // Function to render video tiles
-    async function renderVideoTiles() {
-      const videos = await fetchRecentVideos();
+// Function to render video tiles
+async function renderVideoTiles() {
+  // Check the 'cat' URL parameter
+  const urlParams = new URLSearchParams(window.location.search);
+  const catParam = urlParams.get('cat');
+
+  // Set the number of videos to fetch based on the 'cat' parameter
+  const numVideos = catParam === '1' ? 36 : 3;
+
+  // Check if 'cat' is not present, equal to 0, or equal to 1 before fetching videos
+  if (catParam === null || catParam === '0' || catParam === '1') {
+    try {
+      // Fetch recent videos
+      const videos = await fetchRecentVideos(numVideos);
       const videosContainer = document.getElementById('recentVideos');
 
       // Clear the existing content
@@ -88,10 +99,24 @@
         videoTile.appendChild(videoDetails);
         videosContainer.appendChild(videoTile);
       });
-    }
 
-    // Call the function to render video tiles
-    renderVideoTiles();
+      console.log('Video tiles successfully rendered!');
+    } catch (error) {
+      console.error('Error fetching and rendering video tiles:', error);
+    }
+  }
+
+  // Hide categories and related text if 'cat' is greater than or equal to 1
+  if (catParam !== null && parseInt(catParam) >= 1) {
+    const categoriesSection = document.querySelector('section');
+    categoriesSection.style.display = 'none';
+  }
+}
+
+// Call the function to render video tiles
+renderVideoTiles();
+
+
   </script>
 </body>
 

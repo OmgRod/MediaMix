@@ -1,7 +1,7 @@
 {
     "name": "MediaMix",
     "short_name": "MediaMix",
-    "description": "Watch videos, listen to music, watch movies, and read eBooks all in one place!",
+    "description": "Watch videos, listen to music and watch movies all in one place!",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",

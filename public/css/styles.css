@@ -15,6 +15,7 @@
 .video-thumbnail-home {
     max-width: 100%;
     aspect-ratio: 16/9;
+    height: 33vh;
 }
   
   .video-details-home {
