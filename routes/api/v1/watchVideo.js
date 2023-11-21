@@ -22,8 +22,8 @@ router.get('/watch', async (req, res) => {
         // Attempt to connect to the database
         const connection = await pool.getConnection();
 
-        // Retrieve video details from the database, including the title
-        const [videoRows] = await connection.query('SELECT Title, URL FROM videos WHERE VideoID = ?', [videoId]);
+        // Retrieve video details from the database, including the title and views
+        const [videoRows] = await connection.query('SELECT Title, URL, Views FROM videos WHERE VideoID = ?', [videoId]);
 
         // Check if the video exists
         if (videoRows.length === 0) {
@@ -31,8 +31,12 @@ router.get('/watch', async (req, res) => {
             return res.status(404).json({ result: 'error', message: 'Video not found' });
         }
 
-        // Get the video details, including the title
+        // Get the video details, including the title and views
         const video = videoRows[0];
+        const views = video.Views + 1; // Increment views by 1
+
+        // Update the database to increment the views count for the watched video
+        await connection.query('UPDATE videos SET Views = ? WHERE VideoID = ?', [views, videoId]);
 
         // Construct the video URL to fetch from the public/uploads directory
         const videoUrl = `${video.URL}`;

@@ -15,6 +15,10 @@ video {
   height: auto; /* Allow the height to adjust proportionally */
 }
 
+#like-btns {
+  font-size: 2.5rem;
+}
+
 /* Media query for landscape orientation */
 @media (orientation: landscape) {
   video {
@@ -40,5 +44,12 @@ video {
         Your browser does not support the video tag.
     </video>
     <h1><%= videoTitle %></h1>
+    <p>- views</p>
+    <div id="like-btns">
+      <a><i class="fa-regular fa-thumbs-up"></i></a>
+      <a><i class="fa-regular fa-thumbs-down"></i></a>
+    </div>
+
+    <script src="js/like.js"></script>
 </body>
 </html>

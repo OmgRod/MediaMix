@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const webpages = require('./routes/defaults/webpages'); // Adjust the path as needed
 app.use(webpages);
 
-// Require and use your middleware modules here
+// Require and use middleware modules here
 
 const getVideoRecommendations = require('./routes/api/v1/getVideoRecommendations'); // Adjust the path as needed
 app.use('/api/v1/getVideoRecommendations', getVideoRecommendations);

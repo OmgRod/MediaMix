@@ -12,11 +12,13 @@
       grid-template-columns: repeat(3, 30vw); /* Three columns with fixed width for landscape */
       gap: 10px; /* Add spacing between video tiles */
       justify-content: space-between; /* Align content */
+      overflow: hidden;
     }
 
     .video-home {
       margin-bottom: 10px; /* Add spacing between video rows */
       max-width: 30vw; /* Limit max width for landscape */
+      cursor: pointer;
     }
 
     /* Adjust styles for portrait orientation */
@@ -37,8 +39,23 @@
     }
 
     .video-details-home {
-      max-width: 100%;
-    }
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: 10px; /* Add margin for spacing from the thumbnail */
+  width: 100%;
+}
+
+.video-details-home p {
+  margin-top: 5px; /* Adjust top margin for spacing between title and views */
+}
+
+.video-details-home h6,
+.video-details-home p {
+  margin: 0; /* Remove default margin */
+}
+
 
     .hidden {
       display: none; /* Hide elements */
