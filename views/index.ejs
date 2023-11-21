@@ -8,18 +8,28 @@
   <style>
     /* Add CSS styles for the video tiles */
     .videos-container {
-      display: flex;
-      overflow-x: auto; /* Enable horizontal scrolling */
+      display: grid;
+      grid-template-columns: repeat(3, 30vw); /* Three columns with fixed width for landscape */
+      gap: 10px; /* Add spacing between video tiles */
+      justify-content: space-between; /* Align content */
     }
 
     .video-home {
-      width: 30vw;
-      margin-right: 10px; /* Add spacing between video tiles */
+      margin-bottom: 10px; /* Add spacing between video rows */
+      max-width: 30vw; /* Limit max width for landscape */
     }
 
-    /* Remove margin-right for the last video tile to prevent extra spacing */
-    .video-home:last-child {
-      margin-right: 0;
+    /* Adjust styles for portrait orientation */
+    @media (orientation: portrait) {
+      .videos-container {
+        grid-template-columns: 100%; /* One column in portrait */
+      }
+
+      .video-home {
+        width: calc(100% - 20px); /* Full width minus spacing for portrait */
+        max-width: calc(100% - 20px); /* Max width minus spacing for portrait */
+        margin-bottom: 10px; /* Add spacing between video rows */
+      }
     }
 
     .video-thumbnail-home {
@@ -29,6 +39,10 @@
     .video-details-home {
       max-width: 100%;
     }
+
+    .hidden {
+      display: none; /* Hide elements */
+    }
   </style>
 </head>
 
@@ -36,7 +50,21 @@
   <%- include("modules/navbar") %>
   <main class="m-4">
     <section>
-      <h3><a href="/?cat=1">Recent Videos <i class="fa-solid fa-chevron-right"></i></a></h3>
+      <h3 class="<%= (catParam === '2' || catParam === null || catParam === '0') ? '' : 'hidden' %>"><a href="/?cat=2">Continue Watching <i class="fa-solid fa-chevron-right"></i></a></h3>
+      <div class="videos-container" id="continueWatching">
+        <!-- Video tiles will be dynamically generated here -->
+      </div>
+      <h3 class="<%= (catParam === '3' || catParam === null || catParam === '0') ? '' : 'hidden' %>"><a href="/?cat=3">Recommended For You <i class="fa-solid fa-chevron-right"></i></a></h3>
+      <div class="videos-container" id="recommendedVideos">
+        <!-- Video tiles will be dynamically generated here -->
+      </div>
+      <h3 class="<%= (catParam === '4' || catParam === null || catParam === '0') ? '' : 'hidden' %>"><a href="/?cat=4">Trending Now <i class="fa-solid fa-chevron-right"></i></a></h3>
+      <div class="videos-container" id="trendingVideos">
+        <!-- Video tiles will be dynamically generated here -->
+      </div>
+      <h3 class="<%= (catParam === '1' || catParam === null || catParam === '0') ? '' : 'hidden' %>">
+        <a href="/?cat=1">Recent Videos <i class="fa-solid fa-chevron-right"></i></a>
+      </h3>
       <div class="videos-container" id="recentVideos">
         <!-- Video tiles will be dynamically generated here -->
       </div>
@@ -44,80 +72,7 @@
   </main>
   <script src="js/script.js"></script>
   <script src="js/mobile.js"></script>
-  <script>
-    // Fetch recent videos from the API with an optional parameter for the number of videos
-async function fetchRecentVideos(numVideos) {
-  try {
-    const response = await fetch(`/api/v1/recentVideos?limit=${numVideos}`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch recent videos');
-    }
-    const data = await response.json();
-    return data.videos || [];
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
-}
-
-// Function to render video tiles
-async function renderVideoTiles() {
-  // Check the 'cat' URL parameter
-  const urlParams = new URLSearchParams(window.location.search);
-  const catParam = urlParams.get('cat');
-
-  // Set the number of videos to fetch based on the 'cat' parameter
-  const numVideos = catParam === '1' ? 36 : 3;
-
-  // Check if 'cat' is not present, equal to 0, or equal to 1 before fetching videos
-  if (catParam === null || catParam === '0' || catParam === '1') {
-    try {
-      // Fetch recent videos
-      const videos = await fetchRecentVideos(numVideos);
-      const videosContainer = document.getElementById('recentVideos');
-
-      // Clear the existing content
-      videosContainer.innerHTML = '';
-
-      videos.forEach((video) => {
-        const videoTile = document.createElement('a');
-        videoTile.className = 'video-home';
-        videoTile.href = "/video/watch?v=" + video.VideoID;
-
-        const thumbnail = document.createElement('img');
-        thumbnail.className = 'video-thumbnail-home';
-        thumbnail.src = video.ThumbnailURL;
-        thumbnail.alt = video.Title;
-
-        const videoDetails = document.createElement('div');
-        videoDetails.className = 'video-details-home';
-        const title = document.createElement('h6');
-        title.textContent = video.Title;
-        videoDetails.appendChild(title);
-
-        videoTile.appendChild(thumbnail);
-        videoTile.appendChild(videoDetails);
-        videosContainer.appendChild(videoTile);
-      });
-
-      console.log('Video tiles successfully rendered!');
-    } catch (error) {
-      console.error('Error fetching and rendering video tiles:', error);
-    }
-  }
-
-  // Hide categories and related text if 'cat' is greater than or equal to 1
-  if (catParam !== null && parseInt(catParam) >= 1) {
-    const categoriesSection = document.querySelector('section');
-    categoriesSection.style.display = 'none';
-  }
-}
-
-// Call the function to render video tiles
-renderVideoTiles();
-
-
-  </script>
+  <script src="js/homeCategories.js"></script>
 </body>
 
 </html>

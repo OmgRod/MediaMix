@@ -6,7 +6,7 @@ const mysql = require('mysql2/promise'); // Using 'mysql2/promise' for async/awa
 const router = express.Router();
 
 // Define the route for watching videos
-router.get('/video/watch', async (req, res) => {
+router.get('/watch', async (req, res) => {
     try {
         // Get the video ID from the query parameter
         const videoId = req.query.v;

@@ -9,8 +9,9 @@ app.get('/search', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.render('index');
-});
+    const catParam = req.query.cat || null; // Extract 'cat' parameter from the query
+    res.render('index', { catParam }); // Pass catParam to the EJS template
+  });  
 
 app.get('/install/ios', (req, res) => {
     res.render('install/ios');
@@ -30,6 +31,10 @@ app.get('/signup', (req, res) => {
 
 app.get('/login', (req, res) => {
     res.render('login');
+});
+
+app.get('/studio', (req, res) => {
+    res.render('studio');
 });
 
 module.exports = app;
