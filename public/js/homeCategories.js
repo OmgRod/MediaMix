@@ -5,8 +5,6 @@ async function fetchVideosForCategory(catParam, numVideos) {
 
     if (catParam === '1' || catParam === '2' || catParam === '3' || catParam === '4') {
       apiUrl += `${catParam === '1' ? 'recentVideos' : catParam === '2' ? 'continueWatching' : catParam === '3' ? 'recommendedVideos' : 'trendingVideos'}?limit=${numVideos}`;
-    } else if (catParam === null || catParam === '0') {
-      apiUrl += 'recentVideos?limit=3';
     }
 
     const response = await fetch(apiUrl);

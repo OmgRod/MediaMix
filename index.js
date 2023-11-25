@@ -48,6 +48,18 @@ app.use(likeVideo);
 const dislikeVideo = require('./routes/api/v2/dislikeVideo'); // Adjust the path as needed
 app.use(dislikeVideo);
 
+const changePassword = require('./routes/api/v3/changePassword'); // Adjust the path as needed
+app.use(changePassword);
+
+const changeUsername = require('./routes/api/v3/changeUsername'); // Adjust the path as needed
+app.use(changeUsername);
+
+const setUserCountry = require('./routes/api/v3/setUserCountry'); // Adjust the path as needed
+app.use(setUserCountry);
+
+const setUserProfilePicture = require('./routes/api/v3/setUserProfilePicture'); // Adjust the path as needed
+app.use(setUserProfilePicture);
+
 // Create the HTTP server with Express.js app
 const server = http.createServer(app);
 
