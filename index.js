@@ -13,11 +13,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Include your middleware
 const webpages = require('./routes/defaults/webpages'); // Adjust the path as needed
 app.use(webpages);
 
 // Require and use middleware modules here
-
 const getVideoRecommendations = require('./routes/api/v1/getVideoRecommendations'); // Adjust the path as needed
 app.use('/api/v1/getVideoRecommendations', getVideoRecommendations);
 
@@ -59,6 +59,11 @@ app.use(setUserCountry);
 
 const setUserProfilePicture = require('./routes/api/v3/setUserProfilePicture'); // Adjust the path as needed
 app.use(setUserProfilePicture);
+
+// WebcamJS setup and button integration
+// app.get('/record', (req, res) => {
+//   res.render('record'); // Render the 'record.ejs' file for recording
+// });
 
 // Create the HTTP server with Express.js app
 const server = http.createServer(app);

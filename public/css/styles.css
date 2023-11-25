@@ -31,3 +31,8 @@
   #username-video {
     font-weight: bold;
   }
+
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }

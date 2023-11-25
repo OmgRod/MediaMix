@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("modules/head") %>
+  <%- include("modules/defaults") %>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    #camera {
+      width: 640px;
+      height: 480px;
+      margin-bottom: 20px;
+    }
+
+    .record-button {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #ffcccc; /* Light red */
+      border: none;
+      transition: width 0.3s, border-radius 0.3s;
+    }
+
+    .recording {
+      width: 150px;
+      border-radius: 10px;
+    }
+  </style>
+  <meta charset="UTF-8">
+  <title>Record Video (Experimental + Unfinished)</title>
+  <script src="/webcamjs/webcam.min.js"></script>
+</head>
+
+<body>
+    <%- include("modules/navbar") %>
+    <div class="row">
+        <div class="col-xs-1 text-center">
+            <h1>Record Video (Experimental + Unfinished)</h1>
+  <div id="camera"></div>
+  <button id="recordButton" class="record-button" onclick="toggleRecording()"> </button>
+        </div>
+    </div>
+
+  <script>
+    Webcam.set({
+      width: 640,
+      height: 480,
+      dest_width: 640,
+      dest_height: 480,
+      image_format: 'jpeg',
+      jpeg_quality: 90,
+      force_flash: false
+    });
+
+    Webcam.attach('#camera');
+
+    let isRecording = false;
+
+    function toggleRecording() {
+      const button = document.getElementById('recordButton');
+      if (!isRecording) {
+        isRecording = true;
+        button.classList.add('recording');
+        // Logic to start recording
+      } else {
+        isRecording = false;
+        button.classList.remove('recording');
+        // Logic to stop recording and save the video
+      }
+    }
+  </script>
+</body>
+
+</html>

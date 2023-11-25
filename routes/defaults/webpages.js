@@ -37,4 +37,8 @@ app.get('/studio', (req, res) => {
     res.render('studio');
 });
 
+// app.get('/record', (req, res) => {
+//     res.render('record');
+// });
+
 module.exports = app;
