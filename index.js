@@ -42,6 +42,12 @@ app.use(loginAccount);
 const deleteUnusedVideos = require('./routes/api/v1/deleteUnusedVideos'); // Adjust the path as needed
 app.use(deleteUnusedVideos);
 
+const likeVideo = require('./routes/api/v2/likeVideo'); // Adjust the path as needed
+app.use(likeVideo);
+
+const dislikeVideo = require('./routes/api/v2/dislikeVideo'); // Adjust the path as needed
+app.use(dislikeVideo);
+
 // Create the HTTP server with Express.js app
 const server = http.createServer(app);
 

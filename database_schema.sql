@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2023 at 01:10 PM
+-- Generation Time: Nov 25, 2023 at 08:35 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -38,6 +38,19 @@ CREATE TABLE `comments` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `dislikes`
+--
+
+CREATE TABLE `dislikes` (
+  `LikeID` int(11) NOT NULL,
+  `UserID` int(11) DEFAULT NULL,
+  `VideoID` int(11) DEFAULT NULL,
+  `CreatedAt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `likes`
 --
 
@@ -45,7 +58,8 @@ CREATE TABLE `likes` (
   `LikeID` int(11) NOT NULL,
   `UserID` int(11) DEFAULT NULL,
   `VideoID` int(11) DEFAULT NULL,
-  `CreatedAt` timestamp NOT NULL DEFAULT current_timestamp()
+  `CreatedAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `IsLike` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -183,6 +197,18 @@ CREATE TABLE `views` (
   `ViewedAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `watch_history`
+--
+
+CREATE TABLE `watch_history` (
+  `WatchID` int(11) NOT NULL,
+  `UserID` int(11) NOT NULL,
+  `VideoID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -266,6 +292,12 @@ ALTER TABLE `views`
   ADD KEY `VideoID` (`VideoID`);
 
 --
+-- Indexes for table `watch_history`
+--
+ALTER TABLE `watch_history`
+  ADD PRIMARY KEY (`WatchID`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -315,13 +347,13 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `videos`
 --
 ALTER TABLE `videos`
-  MODIFY `VideoID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2147483648;
+  MODIFY `VideoID` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `videotags`
@@ -334,6 +366,12 @@ ALTER TABLE `videotags`
 --
 ALTER TABLE `views`
   MODIFY `ViewID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `watch_history`
+--
+ALTER TABLE `watch_history`
+  MODIFY `WatchID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

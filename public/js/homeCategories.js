@@ -1,69 +1,79 @@
 // Function to fetch videos for different categories
 async function fetchVideosForCategory(catParam, numVideos) {
-    try {
-      let apiUrl = '/api/v1/';
-      
-      if (catParam === '1' || catParam === '2' || catParam === '3' || catParam === '4') {
-        apiUrl += `${catParam === '1' ? 'recentVideos' : catParam === '2' ? 'continueWatching' : catParam === '3' ? 'recommendedVideos' : 'trendingVideos'}?limit=${numVideos}`;
-      } else if (catParam === null || catParam === '0') {
-        apiUrl += 'recentVideos?limit=3';
-      }
+  try {
+    let apiUrl = '/api/v1/';
 
-      const response = await fetch(apiUrl);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch ${catParam} videos`);
-      }
-      const data = await response.json();
-      return data.videos || [];
-    } catch (error) {
-      console.error(`Error fetching ${catParam} videos:`, error);
-      return [];
+    if (catParam === '1' || catParam === '2' || catParam === '3' || catParam === '4') {
+      apiUrl += `${catParam === '1' ? 'recentVideos' : catParam === '2' ? 'continueWatching' : catParam === '3' ? 'recommendedVideos' : 'trendingVideos'}?limit=${numVideos}`;
+    } else if (catParam === null || catParam === '0') {
+      apiUrl += 'recentVideos?limit=3';
     }
-  }
 
-  // Function to render video tiles for different categories
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch ${catParam} videos`);
+    }
+    const data = await response.json();
+    return data.videos || [];
+  } catch (error) {
+    console.error(`Error fetching ${catParam} videos:`, error);
+    return [];
+  }
+}
+
+// Function to render video tiles for different categories
 async function renderVideosForCategory(catParam, numVideos, containerId) {
   try {
-      const videos = await fetchVideosForCategory(catParam, numVideos);
-      const videosContainer = document.getElementById(containerId);
+    const videos = await fetchVideosForCategory(catParam, numVideos);
+    const videosContainer = document.getElementById(containerId);
 
-      videosContainer.innerHTML = ''; // Clear previous content
+    videosContainer.innerHTML = ''; // Clear previous content
 
-      videos.forEach((video) => {
-        const videoTile = document.createElement('div');
-        videoTile.className = 'video-home';
-        
-        // Click event listener to open the video link in the same window
-        videoTile.onclick = () => {
-            window.open(`/watch?v=${video.VideoID}`, '_self');
-        };
+    videos.forEach((video) => {
+      const videoTile = document.createElement('div');
+      videoTile.className = 'video-home';
 
-          const thumbnail = document.createElement('img');
-          thumbnail.className = 'video-thumbnail-home';
-          thumbnail.src = video.ThumbnailURL;
-          thumbnail.alt = video.Title;
+      // Click event listener to open the video link in the same window
+      videoTile.onclick = () => {
+        window.open(`/watch?v=${video.VideoID}`, '_self');
+      };
 
-          const videoDetails = document.createElement('div');
-          videoDetails.className = 'video-details-home';
-          
-          const title = document.createElement('h6');
-          title.textContent = video.Title;
+      const thumbnail = document.createElement('img');
+      thumbnail.className = 'video-thumbnail-home';
+      thumbnail.src = video.ThumbnailURL;
+      thumbnail.alt = video.Title;
 
-          const views = document.createElement('p');
-          views.textContent = `${video.views} views`; // Assuming 'views' is the property containing the view count
-          views.className = 'view-count'; // Adding a class for styling
+      const videoDetails = document.createElement('div');
+      videoDetails.className = 'video-details-home';
 
-          videoDetails.appendChild(title);
-          videoDetails.appendChild(views);
+      const title = document.createElement('h6');
+      title.textContent = video.Title;
 
-          videoTile.appendChild(thumbnail);
-          videoTile.appendChild(videoDetails);
-          videosContainer.appendChild(videoTile);
-      });
+      const views = document.createElement('p');
+      views.textContent = `${video.views} views`; // Assuming 'views' is the property containing the view count
+      views.className = 'view-count'; // Adding a class for styling
 
-      console.log(`${catParam} video tiles successfully rendered!`);
+      const user = document.createElement('p');
+
+      const userContent = document.createElement('a'); // Change to 'a' element for hyperlink
+      userContent.id = "username-video"
+userContent.textContent = `${video.Username}`; // Assuming 'Username' is the property containing the username
+userContent.className = 'username'; // Adding a class for styling
+userContent.href = `/users?u=${video.UserID}`; // Assuming 'UserId' is the property containing the user ID
+
+videoDetails.appendChild(title);
+videoDetails.appendChild(views);
+videoDetails.appendChild(user); // Append 'user', not 'views'
+user.appendChild(userContent); // Append 'userContent' to 'user'
+
+      videoTile.appendChild(thumbnail);
+      videoTile.appendChild(videoDetails);
+      videosContainer.appendChild(videoTile);
+    });
+
+    console.log(`${catParam} video tiles successfully rendered!`);
   } catch (error) {
-      console.error(`Error fetching and rendering ${catParam} video tiles:`, error);
+    console.error(`Error fetching and rendering ${catParam} video tiles:`, error);
   }
 }
 

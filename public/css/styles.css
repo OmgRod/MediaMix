@@ -27,3 +27,7 @@
     text-decoration: none;
     color: black;
   }
+
+  #username-video {
+    font-weight: bold;
+  }

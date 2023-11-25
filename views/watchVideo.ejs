@@ -16,7 +16,7 @@ video {
 }
 
 #like-btns {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
 }
 
 /* Media query for landscape orientation */
@@ -43,12 +43,16 @@ video {
         <source src="<%= videoUrl %>" type="video/mp4">
         Your browser does not support the video tag.
     </video>
-    <h1><%= videoTitle %></h1>
-    <p>- views</p>
-    <div id="like-btns">
-      <a><i class="fa-regular fa-thumbs-up"></i></a>
-      <a><i class="fa-regular fa-thumbs-down"></i></a>
-    </div>
+    <main class="m-4">
+      <h1><%= videoTitle %></h1>
+      <p><%= videoViews %> views</p>
+      <div id="like-btns">
+        <a onclick="likeVideo('<%= videoId %>')"><i id="likeBtn" class="fa-regular fa-thumbs-up"></i></a>
+        <span id="likeSpan"><%= videoLikes %></span>
+        <a onclick="dislikeVideo(' <%= videoId %>')"><i id="dislikeBtn" class="fa-regular fa-thumbs-down"></i></a>
+        <span id="dislikeSpan"><%= videoDislikes %></span>
+      </div>
+    </main>
 
     <script src="js/like.js"></script>
 </body>

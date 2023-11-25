@@ -5,7 +5,7 @@ const mysql = require('mysql2/promise'); // Using 'mysql2/promise' for async/awa
 // Create an Express router
 const router = express.Router();
 
-// Define a route for fetching recent videos
+// Define a route for fetching recent videos along with user information
 router.get('/api/v1/recentVideos', async (req, res) => {
     try {
         // Extract the 'limit' query parameter from the request
@@ -22,15 +22,19 @@ router.get('/api/v1/recentVideos', async (req, res) => {
         // Attempt to connect to the database
         const connection = await pool.getConnection();
 
-        // Query the database to get the specified number of most recent videos
+        // Query the database to get the specified number of most recent videos along with user information
         const [rows] = await connection.query(
-            `SELECT * FROM videos ORDER BY CreatedAt DESC LIMIT ${limit}`
+            `SELECT v.*, u.Username 
+            FROM videos v 
+            INNER JOIN users u ON v.UserId = u.UserId 
+            ORDER BY v.CreatedAt DESC 
+            LIMIT ${limit}`
         );
 
         // Release the database connection
         connection.release();
 
-        // Send JSON response with the list of recent videos
+        // Send JSON response with the list of recent videos along with user information
         res.json({ result: 'success', videos: rows });
     } catch (error) {
         console.error(error);

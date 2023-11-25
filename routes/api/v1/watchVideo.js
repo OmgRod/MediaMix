@@ -23,7 +23,7 @@ router.get('/watch', async (req, res) => {
         const connection = await pool.getConnection();
 
         // Retrieve video details from the database, including the title and views
-        const [videoRows] = await connection.query('SELECT Title, URL, Views FROM videos WHERE VideoID = ?', [videoId]);
+        const [videoRows] = await connection.query('SELECT Title, URL, Views, likes, dislikes FROM videos WHERE VideoID = ?', [videoId]);
 
         // Check if the video exists
         if (videoRows.length === 0) {
@@ -42,7 +42,7 @@ router.get('/watch', async (req, res) => {
         const videoUrl = `${video.URL}`;
 
         // Render the "watchVideo" view and pass the video details, including the title
-        res.render('watchVideo', { videoUrl, videoTitle: video.Title });
+        res.render('watchVideo', { videoUrl, videoTitle: video.Title, videoId, videoViews: video.Views, videoLikes: video.likes, videoDislikes: video.dislikes });
 
         // Release the database connection
         connection.release();
