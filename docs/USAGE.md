@@ -69,6 +69,10 @@ IP_ADDRESS=192.168.0.145
 
 > If there are issues with the database login, go to XAMPP and next to MySQL, there is a button saying "Config". Click that and select my.ini. Check there and look for the hostname, password, username and database name. Otherwise, it should just say those in "<>" and that means they are just the default.
 
+## Section 4.3: Uploads folder
+
+Navigate to the public folder and create a folder called "uploads"
+
 ## Section 5.1: Running
 
 1. Go to the root and open run.bat
