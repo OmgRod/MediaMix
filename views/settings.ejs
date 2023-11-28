@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include("modules/head") %>
+  <%- include("modules/defaults") %>
+  <title>MediaMix</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Custom styles to reset Bootstrap's fieldset and legend */
+    @media (orientation: landscape) {
+      fieldset {
+      border: none;
+      padding: 0;
+      margin: 0;
+      width: 50%;
+    }
+    }
+    legend {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      padding: 0;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      line-height: inherit;
+      color: #000;
+      white-space: normal;
+    }
+    body {
+        width: 100vw;
+    }
+  </style>
+</head>
+
+<body>
+  <%- include("modules/navbar") %>
+  <main class="m-4">
+    <h1>Settings</h1>
+    <fieldset id="username">
+      <legend>Profile Picture</legend>
+<div class="form-group" style="display: flex; align-items: center;">
+    <input name="profilepicture" type="file" accept=".png, .jpg, .jpeg">
+</div>
+<button class="btn btn-primary"><i class="fa-solid fa-pencil"></i> Update</button>
+        <legend>Update Username</legend>
+        <div class="form-group" style="display: flex; align-items: center;">
+          <input name="newsername" type="text" class="form-control" style="margin-right: 5px;" placeholder="New Username...">
+          <span><a><i class="fa-solid fa-check" style="color: #00e100; height: 1rem;"></i></a></span>
+      </div>
+      <button class="btn btn-primary"><i class="fa-solid fa-pencil"></i> Update</button>
+    </fieldset>
+    <fieldset>
+        <legend>Change Password</legend>
+        <div class="form-group" style="display: flex; align-items: center;">
+          <input name="password" type="password" class="form-control" style="margin-right: 5px;" placeholder="Password...">
+          <span><a><i class="fa-solid fa-check" style="color: #00e100; height: 1rem;"></i></a></span>
+      </div> 
+      <button class="btn btn-primary"><i class="fa-solid fa-pencil"></i> Update</button>
+      <legend>Theme</legend>
+<div class="form-group">
+    <label for="theme">Select Theme:</label>
+    <select name="theme" id="theme" class="form-control">
+        <option value="light">Light Mode</option>
+        <option value="dark">Dark Mode</option>
+        <option value="automatic">Automatic (Device Theme)</option>
+    </select>
+  </div>
+  <button class="btn btn-primary"><i class="fa-solid fa-pencil"></i> Update</button>
+    </fieldset>
+  </main>
+</body>
+
+</html>

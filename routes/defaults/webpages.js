@@ -33,8 +33,12 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
-app.get('/studio', (req, res) => {
-    res.render('studio');
+app.get('/settings', (req, res) => {
+    res.render('settings');
+});
+
+app.get('/dashboard', (req, res) => {
+    res.render('dashboard');
 });
 
 // app.get('/record', (req, res) => {

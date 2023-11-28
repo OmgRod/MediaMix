@@ -30,9 +30,6 @@ app.use('/api/v1/createAccount', createAccount);
 const recents = require('./routes/api/v1/recents'); // Adjust the path as needed
 app.use(recents);
 
-const accountAuth = require('./routes/api/v1/accountAuth'); // Adjust the path as needed
-app.use(accountAuth);
-
 const watchVideo = require('./routes/api/v1/watchVideo'); // Adjust the path as needed
 app.use(watchVideo);
 
