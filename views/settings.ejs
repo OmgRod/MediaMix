@@ -40,10 +40,15 @@
     <h1>Settings</h1>
     <fieldset id="username">
       <legend>Profile Picture</legend>
-<div class="form-group" style="display: flex; align-items: center;">
-    <input name="profilepicture" type="file" accept=".png, .jpg, .jpeg">
-</div>
-<button class="btn btn-primary"><i class="fa-solid fa-pencil"></i> Update</button>
+      <!-- <form method="post" action="/api/v3/setUserProfilePicture"> -->
+        <div class="form-group" style="display: flex; align-items: center; flex-wrap: wrap;">
+          <img src="/uploads/pfp_DEFAULT.jpg" style="height: 5rem; margin-right: 1rem;"/>
+          <input name="username" id="pfp-username" style="margin-right: 1rem;">
+          <input name="password" id="pfp-password" style="margin-right: 1rem;">
+          <input type="file" id="pfp" name="pfp" accept="image/*" required>
+        </div>
+        <button class="btn btn-primary" onclick="setUserProfilePicture()"><i class="fa-solid fa-pencil"></i> Update</button>
+      <!-- </form> -->
         <legend>Update Username</legend>
         <div class="form-group" style="display: flex; align-items: center;">
           <input name="newsername" type="text" class="form-control" style="margin-right: 5px;" placeholder="New Username...">
@@ -70,6 +75,11 @@
   <button class="btn btn-primary"><i class="fa-solid fa-pencil"></i> Update</button>
     </fieldset>
   </main>
+  <script src="/js/settings.js"></script>
+  <script>
+    document.getElementById("pfp-username").value = localStorage.getItem("username")
+    document.getElementById("pfp-password").value = localStorage.getItem("hashedPassword")
+  </script>
 </body>
 
 </html>

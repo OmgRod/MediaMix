@@ -64,7 +64,7 @@ DB_NAME=mediamix
 
 # Other Stuff Here...
 
-IP_ADDRESS=192.168.0.145
+IP_ADDRESS=192.168.0.145 # Use your own local IP address
 ```
 
 > If there are issues with the database login, go to XAMPP and next to MySQL, there is a button saying "Config". Click that and select my.ini. Check there and look for the hostname, password, username and database name. Otherwise, it should just say those in "<>" and that means they are just the default.
