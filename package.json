@@ -14,7 +14,7 @@
     "body-parser": "^1.20.2",
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
-    "express": "^4.18.2",
+    "express": "^4.19.2",
     "express-load": "^1.1.16",
     "fast-levenshtein": "^3.0.0",
     "fs": "^0.0.1-security",
