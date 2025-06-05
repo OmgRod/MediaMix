@@ -22,7 +22,7 @@
     "http": "^0.0.1-security",
     "leven": "^4.0.0",
     "multer": "^2.0.1",
-    "mysql2": "^3.9.7",
+    "mysql2": "^3.9.8",
     "require-all": "^3.0.0",
     "uuid": "^9.0.1",
     "webcamjs": "^1.0.26"
